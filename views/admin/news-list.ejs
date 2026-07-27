@@ -1,0 +1,29 @@
+<%- include('layout-top', {title:'Manage News', path:'/admin/news', user, messages}) %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0">All News Articles</h5>
+  <a href="/admin/news/new" class="btn btn-primary btn-sm"><i class="fas fa-plus me-1"></i>Add News</a>
+</div>
+<div class="admin-table">
+  <table class="table table-hover mb-0">
+    <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% if (items && items.length) { items.forEach(item => { %>
+      <tr>
+        <td class="fw-semibold"><%= item.title.substring(0,50) %><%= item.title.length>50?'...':'' %></td>
+        <td><span class="badge bg-secondary"><%= item.category || '-' %></span></td>
+        <td><span class="badge <%= item.published?'bg-success':'bg-warning text-dark' %>"><%= item.published?'Published':'Draft' %></span></td>
+        <td><%= new Date(item.created_at).toLocaleDateString('en-GB') %></td>
+        <td>
+          <a href="/admin/news/<%= item.id %>/edit" class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></a>
+          <form action="/admin/news/<%= item.id %>/delete" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-sm btn-outline-danger btn-delete"><i class="fas fa-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+      <% }) } else { %>
+      <tr><td colspan="5" class="text-center text-muted py-4">No news articles yet.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+<%- include('layout-bottom') %>

@@ -1,0 +1,22 @@
+<%- include('layout-top', {title: item ? 'Edit User' : 'Add User', path:'/admin/users', user, messages}) %>
+<div class="admin-card">
+  <h5><%= item ? 'Edit User' : 'Add New User' %></h5>
+  <form action="<%= item ? '/admin/users/'+item.id+'/edit' : '/admin/users/new' %>" method="POST">
+    <div class="row g-3">
+      <div class="col-md-6"><label class="form-label fw-semibold">Full Name *</label><input type="text" name="name" class="form-control" required value="<%= item ? item.name : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Email *</label><input type="email" name="email" class="form-control" required value="<%= item ? item.email : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Password <%= item ? '(leave blank to keep current)' : '*' %></label><input type="password" name="password" class="form-control" <%= item ? '' : 'required' %> placeholder="••••••••"></div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Role</label>
+        <select name="role" class="form-select">
+          <option value="admin" <%= item && item.role==='admin' ? 'selected' : '' %>>Admin</option>
+        </select>
+      </div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save</button>
+        <a href="/admin/users" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

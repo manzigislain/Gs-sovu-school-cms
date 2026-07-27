@@ -1,0 +1,49 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+<div class="breadcrumb-section">
+  <div class="container">
+    <h1 class="fw-bold">Latest News</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">News</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <% if (news && news.length) { %>
+        <% news.forEach(item => { %>
+        <div class="col-lg-4 col-md-6 fade-in">
+          <div class="card news-card h-100">
+            <% if (item.image_url) { %>
+            <img src="<%= item.image_url %>" class="card-img-top" alt="<%= item.title %>">
+            <% } else { %>
+            <div style="height:200px;background:linear-gradient(135deg,var(--primary),#2a5298);display:flex;align-items:center;justify-content:center">
+              <i class="fas fa-newspaper fa-3x text-warning"></i>
+            </div>
+            <% } %>
+            <div class="card-body">
+              <span class="badge-category"><%= item.category || 'News' %></span>
+              <h6 class="fw-bold mt-2"><%= item.title %></h6>
+              <p class="text-muted small"><%= item.excerpt ? item.excerpt.substring(0,120) + '...' : '' %></p>
+            </div>
+            <div class="card-footer bg-transparent border-0 pb-3 d-flex justify-content-between align-items-center">
+              <a href="/news/<%= item.slug %>" class="text-primary fw-semibold small">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+              <span class="text-muted small"><%= new Date(item.created_at).toLocaleDateString('en-GB') %></span>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      <% } else { %>
+      <div class="col-12 text-center py-5">
+        <i class="fas fa-newspaper fa-4x text-muted mb-3"></i>
+        <p class="text-muted">No news articles published yet.</p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

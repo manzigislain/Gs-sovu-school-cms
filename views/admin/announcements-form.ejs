@@ -1,0 +1,30 @@
+<%- include('layout-top', {title: item ? 'Edit Announcement' : 'Add Announcement', path:'/admin/announcements', user, messages}) %>
+<div class="admin-card">
+  <h5><%= item ? 'Edit Announcement' : 'Add Announcement' %></h5>
+  <form action="<%= item ? '/admin/announcements/'+item.id+'/edit' : '/admin/announcements/new' %>" method="POST">
+    <div class="row g-3">
+      <div class="col-12"><label class="form-label fw-semibold">Title *</label><input type="text" name="title" class="form-control" required value="<%= item ? item.title : '' %>"></div>
+      <div class="col-12"><label class="form-label fw-semibold">Content</label><textarea name="content" class="form-control" rows="4"><%= item ? (item.content||'') : '' %></textarea></div>
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Priority</label>
+        <select name="priority" class="form-select">
+          <option value="normal" <%= !item || item.priority==='normal' ? 'selected' : '' %>>Normal</option>
+          <option value="high" <%= item && item.priority==='high' ? 'selected' : '' %>>High (Important)</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Status</label>
+        <select name="active" class="form-select">
+          <option value="true" <%= !item || item.active ? 'selected' : '' %>>Active</option>
+          <option value="false" <%= item && !item.active ? 'selected' : '' %>>Hidden</option>
+        </select>
+      </div>
+      <div class="col-md-4"><label class="form-label fw-semibold">Expires On</label><input type="date" name="expires_at" class="form-control" value="<%= item && item.expires_at ? new Date(item.expires_at).toISOString().split('T')[0] : '' %>"></div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save</button>
+        <a href="/admin/announcements" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

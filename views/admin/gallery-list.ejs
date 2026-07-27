@@ -1,0 +1,27 @@
+<%- include('layout-top', {title:'Gallery', path:'/admin/gallery', user, messages}) %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0">Gallery Images</h5>
+  <a href="/admin/gallery/new" class="btn btn-primary btn-sm"><i class="fas fa-plus me-1"></i>Add Image</a>
+</div>
+<div class="row g-3">
+  <% if (items && items.length) { items.forEach(item => { %>
+  <div class="col-lg-3 col-md-4 col-6">
+    <div class="card">
+      <img src="<%= item.image_url %>" style="height:160px;object-fit:cover;width:100%" alt="<%= item.title %>">
+      <div class="card-body p-2">
+        <p class="fw-semibold small mb-1"><%= item.title || 'Untitled' %></p>
+        <% if (item.category) { %><span class="badge bg-secondary" style="font-size:0.7rem"><%= item.category %></span><% } %>
+        <div class="d-flex gap-1 mt-2">
+          <a href="/admin/gallery/<%= item.id %>/edit" class="btn btn-xs btn-outline-primary" style="font-size:0.75rem;padding:2px 8px"><i class="fas fa-edit"></i></a>
+          <form action="/admin/gallery/<%= item.id %>/delete" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-xs btn-outline-danger btn-delete" style="font-size:0.75rem;padding:2px 8px"><i class="fas fa-trash"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }) } else { %>
+  <div class="col-12 text-center py-5 text-muted"><i class="fas fa-images fa-3x mb-3"></i><p>No gallery images yet.</p></div>
+  <% } %>
+</div>
+<%- include('layout-bottom') %>

@@ -1,0 +1,31 @@
+<%- include('layout-top', {title:'Users', path:'/admin/users', user, messages}) %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0">Admin Users</h5>
+  <a href="/admin/users/new" class="btn btn-primary btn-sm"><i class="fas fa-plus me-1"></i>Add User</a>
+</div>
+<div class="admin-table">
+  <table class="table table-hover mb-0">
+    <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Created</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% if (items && items.length) { items.forEach(item => { %>
+      <tr>
+        <td class="fw-semibold"><%= item.name %></td>
+        <td><%= item.email %></td>
+        <td><span class="badge bg-primary"><%= item.role %></span></td>
+        <td><%= new Date(item.created_at).toLocaleDateString('en-GB') %></td>
+        <td>
+          <a href="/admin/users/<%= item.id %>/edit" class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></a>
+          <% if (item.id !== user.id) { %>
+          <form action="/admin/users/<%= item.id %>/delete" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-sm btn-outline-danger btn-delete"><i class="fas fa-trash"></i></button>
+          </form>
+          <% } %>
+        </td>
+      </tr>
+      <% }) } else { %>
+      <tr><td colspan="5" class="text-center text-muted py-4">No users found.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+<%- include('layout-bottom') %>

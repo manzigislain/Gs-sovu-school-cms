@@ -1,0 +1,60 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+<div class="breadcrumb-section">
+  <div class="container">
+    <h1 class="fw-bold">Photo Gallery</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Gallery</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<section class="py-5">
+  <div class="container">
+    <!-- Filter Buttons -->
+    <div class="d-flex flex-wrap gap-2 mb-4 justify-content-center fade-in">
+      <button class="btn btn-sm btn-primary filter-btn active" data-filter="all">All</button>
+      <% const cats = [...new Set(gallery.map(g => g.category).filter(Boolean))]; %>
+      <% cats.forEach(cat => { %>
+      <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="<%= cat %>"><%= cat.charAt(0).toUpperCase()+cat.slice(1) %></button>
+      <% }) %>
+    </div>
+    <% if (gallery && gallery.length) { %>
+    <div class="row g-3" id="galleryGrid">
+      <% gallery.forEach(img => { %>
+      <div class="col-lg-4 col-md-6 col-6 fade-in gallery-filter-item" data-category="<%= img.category %>">
+        <div class="gallery-item">
+          <img src="<%= img.image_url %>" alt="<%= img.title %>">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <% if (img.title) { %><p class="text-center small text-muted mt-1"><%= img.title %></p><% } %>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <div class="text-center py-5">
+      <i class="fas fa-images fa-4x text-muted mb-3"></i>
+      <p class="text-muted">No gallery images yet.</p>
+    </div>
+    <% } %>
+  </div>
+</section>
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active','btn-primary'));
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.add('btn-outline-primary'));
+    this.classList.add('active','btn-primary');
+    this.classList.remove('btn-outline-primary');
+    const filter = this.dataset.filter;
+    document.querySelectorAll('.gallery-filter-item').forEach(item => {
+      item.style.display = (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
+    });
+  });
+});
+</script>
+<%- include('../partials/footer') %>

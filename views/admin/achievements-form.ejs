@@ -1,0 +1,23 @@
+<%- include('layout-top', {title: item ? 'Edit Achievement' : 'Add Achievement', path:'/admin/achievements', user, messages}) %>
+<div class="admin-card">
+  <h5><%= item ? 'Edit Achievement' : 'Add Achievement' %></h5>
+  <form action="<%= item ? '/admin/achievements/'+item.id+'/edit' : '/admin/achievements/new' %>" method="POST">
+    <div class="row g-3">
+      <div class="col-md-8"><label class="form-label fw-semibold">Title *</label><input type="text" name="title" class="form-control" required value="<%= item ? item.title : '' %>"></div>
+      <div class="col-md-4"><label class="form-label fw-semibold">Year</label><input type="number" name="year" class="form-control" value="<%= item ? (item.year||new Date().getFullYear()) : new Date().getFullYear() %>"></div>
+      <div class="col-12"><label class="form-label fw-semibold">Description</label><textarea name="description" class="form-control" rows="3"><%= item ? (item.description||'') : '' %></textarea></div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Status</label>
+        <select name="active" class="form-select">
+          <option value="true" <%= !item || item.active ? 'selected' : '' %>>Active</option>
+          <option value="false" <%= item && !item.active ? 'selected' : '' %>>Hidden</option>
+        </select>
+      </div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save</button>
+        <a href="/admin/achievements" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

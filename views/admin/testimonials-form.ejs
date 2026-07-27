@@ -1,0 +1,23 @@
+<%- include('layout-top', {title: item ? 'Edit Testimonial' : 'Add Testimonial', path:'/admin/testimonials', user, messages}) %>
+<div class="admin-card">
+  <h5><%= item ? 'Edit Testimonial' : 'Add Testimonial' %></h5>
+  <form action="<%= item ? '/admin/testimonials/'+item.id+'/edit' : '/admin/testimonials/new' %>" method="POST">
+    <div class="row g-3">
+      <div class="col-md-6"><label class="form-label fw-semibold">Name *</label><input type="text" name="name" class="form-control" required value="<%= item ? item.name : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Role</label><input type="text" name="role" class="form-control" placeholder="e.g. Parent, Student, Alumni" value="<%= item ? (item.role||'') : '' %>"></div>
+      <div class="col-12"><label class="form-label fw-semibold">Message *</label><textarea name="message" class="form-control" rows="4" required><%= item ? item.message : '' %></textarea></div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Status</label>
+        <select name="active" class="form-select">
+          <option value="true" <%= !item || item.active ? 'selected' : '' %>>Active</option>
+          <option value="false" <%= item && !item.active ? 'selected' : '' %>>Hidden</option>
+        </select>
+      </div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save</button>
+        <a href="/admin/testimonials" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title + ' | ' : '' %>Admin Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="admin-sidebar" id="adminSidebar">
+  <div class="sidebar-brand">
+    <i class="fas fa-cross me-2"></i>G.S. <span>SOVU</span> Admin
+  </div>
+  <nav class="mt-2">
+    <div class="nav-section">Main</div>
+    <a href="/admin/dashboard" class="nav-link <%= path==='/admin/dashboard'?'active':'' %>"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="/" target="_blank" class="nav-link"><i class="fas fa-globe"></i> View Website</a>
+
+    <div class="nav-section">Content</div>
+    <a href="/admin/settings" class="nav-link <%= path==='/admin/settings'?'active':'' %>"><i class="fas fa-cog"></i> Site Settings</a>
+    <a href="/admin/slides" class="nav-link <%= path==='/admin/slides'?'active':'' %>"><i class="fas fa-images"></i> Hero Slides</a>
+    <a href="/admin/news" class="nav-link <%= path==='/admin/news'?'active':'' %>"><i class="fas fa-newspaper"></i> News</a>
+    <a href="/admin/announcements" class="nav-link <%= path==='/admin/announcements'?'active':'' %>"><i class="fas fa-bullhorn"></i> Announcements</a>
+    <a href="/admin/events" class="nav-link <%= path==='/admin/events'?'active':'' %>"><i class="fas fa-calendar"></i> Events</a>
+    <a href="/admin/gallery" class="nav-link <%= path==='/admin/gallery'?'active':'' %>"><i class="fas fa-photo-video"></i> Gallery</a>
+    <a href="/admin/achievements" class="nav-link <%= path==='/admin/achievements'?'active':'' %>"><i class="fas fa-trophy"></i> Achievements</a>
+    <a href="/admin/testimonials" class="nav-link <%= path==='/admin/testimonials'?'active':'' %>"><i class="fas fa-quote-left"></i> Testimonials</a>
+    <a href="/admin/pages" class="nav-link <%= path==='/admin/pages'?'active':'' %>"><i class="fas fa-file-alt"></i> Pages</a>
+
+    <div class="nav-section">People</div>
+    <a href="/admin/staff" class="nav-link <%= path==='/admin/staff'?'active':'' %>"><i class="fas fa-users"></i> Staff</a>
+
+    <div class="nav-section">Files</div>
+    <a href="/admin/downloads" class="nav-link <%= path==='/admin/downloads'?'active':'' %>"><i class="fas fa-file-download"></i> Downloads</a>
+
+    <div class="nav-section">Communication</div>
+    <a href="/admin/messages" class="nav-link <%= path==='/admin/messages'?'active':'' %>"><i class="fas fa-envelope"></i> Messages</a>
+
+    <div class="nav-section">Account</div>
+    <a href="/admin/users" class="nav-link <%= path==='/admin/users'?'active':'' %>"><i class="fas fa-user-shield"></i> Users</a>
+    <a href="/admin/logout" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </nav>
+</div>
+
+<div class="admin-main">
+  <div class="admin-topbar">
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-sm btn-outline-secondary d-md-none" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+      <h6 class="mb-0 fw-bold"><%= typeof title !== 'undefined' ? title : 'Dashboard' %></h6>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <span class="text-muted small"><i class="fas fa-user me-1"></i><%= user.name %></span>
+      <a href="/admin/logout" class="btn btn-sm btn-outline-danger">Logout</a>
+    </div>
+  </div>
+  <div class="admin-content">
+    <% if (typeof messages !== 'undefined') { %>
+      <% messages.forEach(msg => { %>
+      <div class="alert alert-<%= msg.type === 'error' ? 'danger' : 'success' %> alert-dismissible fade show">
+        <%= msg.msg %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+      <% }) %>
+    <% } %>

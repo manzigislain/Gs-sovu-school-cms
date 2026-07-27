@@ -1,0 +1,422 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<!-- Announcement Ticker -->
+<% if (announcements && announcements.length) { %>
+<div class="announcement-bar">
+  <div class="container d-flex align-items-center gap-3">
+    <span class="fw-bold text-dark text-nowrap"><i class="fas fa-bullhorn me-2"></i>Announcements:</span>
+    <div class="ticker-wrap flex-grow-1">
+      <div class="ticker-content">
+        <% announcements.forEach(a => { %> &nbsp;&nbsp;&nbsp;📢 <%= a.title %> &nbsp;&nbsp;&nbsp;|<% }) %>
+      </div>
+    </div>
+  </div>
+</div>
+<% } %>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <% slides.forEach((slide, i) => { %>
+  <div class="hero-slide" style="background-image:url('<%= slide.image_url %>')">
+    <div class="hero-overlay"></div>
+  </div>
+  <% }) %>
+  <div class="hero-content container">
+    <div class="col-lg-8">
+      <% slides.forEach((slide, i) => { %>
+      <div class="hero-text-slide" id="heroText<%= i %>" style="display:<%= i===0?'block':'none' %>">
+        <p class="text-warning fw-bold mb-2" style="letter-spacing:2px;font-size:0.9rem"><i class="fas fa-cross me-2"></i>CATHOLIC GOVERNMENT-AIDED DAY SCHOOL</p>
+        <h1><%= slide.title %></h1>
+        <p class="mt-3 mb-4"><%= slide.subtitle %></p>
+        <a href="<%= slide.button_link %>" class="btn-gold me-3"><%= slide.button_text %></a>
+        <a href="/contact" class="btn-primary-custom" style="background:transparent;border-color:white;color:white">Contact Us</a>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+  <div class="hero-arrows">
+    <button class="hero-arrow" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
+    <button class="hero-arrow" id="heroNext"><i class="fas fa-chevron-right"></i></button>
+  </div>
+  <div class="hero-indicators">
+    <% slides.forEach((s, i) => { %><button class="hero-dot" data-index="<%= i %>"></button><% }) %>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section style="background:linear-gradient(135deg,var(--primary),#2a5298);padding:40px 0">
+  <div class="container">
+    <div class="row text-center g-3">
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-number counter" data-target="500" data-suffix="+">0</div>
+          <div class="stat-label">Students</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-number counter" data-target="40" data-suffix="+">0</div>
+          <div class="stat-label">Teachers</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-number counter" data-target="30" data-suffix="+">0</div>
+          <div class="stat-label">Years of Excellence</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-number counter" data-target="95" data-suffix="%">0</div>
+          <div class="stat-label">Pass Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Welcome / About Intro -->
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 fade-in">
+        <p class="text-warning fw-bold mb-1" style="letter-spacing:2px;font-size:0.85rem"><i class="fas fa-cross me-2"></i>WELCOME TO</p>
+        <h2 class="section-title text-start"><%= settings.school_name %></h2>
+        <p class="text-muted mt-3"><%= settings.about_intro %></p>
+        <div class="row g-3 mt-2">
+          <div class="col-6">
+            <div class="d-flex align-items-center gap-2">
+              <i class="fas fa-check-circle text-warning fa-lg"></i>
+              <span class="fw-semibold">Primary School</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-center gap-2">
+              <i class="fas fa-check-circle text-warning fa-lg"></i>
+              <span class="fw-semibold">O' Level</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-center gap-2">
+              <i class="fas fa-check-circle text-warning fa-lg"></i>
+              <span class="fw-semibold">A' Level (LFK)</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-center gap-2">
+              <i class="fas fa-check-circle text-warning fa-lg"></i>
+              <span class="fw-semibold">A' Level (MEG)</span>
+            </div>
+          </div>
+        </div>
+        <a href="/about" class="btn-primary-custom mt-4">Learn More</a>
+      </div>
+      <div class="col-lg-6 fade-in">
+        <div class="row g-3">
+          <div class="col-6">
+            <img src="/uploads/images/gallery1.jpg" class="img-fluid rounded-3 shadow" alt="School" style="height:200px;object-fit:cover;width:100%">
+          </div>
+          <div class="col-6">
+            <img src="/uploads/images/gallery2.jpeg" class="img-fluid rounded-3 shadow" alt="School" style="height:200px;object-fit:cover;width:100%;margin-top:30px">
+          </div>
+          <div class="col-6">
+            <img src="/uploads/images/gallery3.jpg" class="img-fluid rounded-3 shadow" alt="School" style="height:200px;object-fit:cover;width:100%;margin-top:-30px">
+          </div>
+          <div class="col-6">
+            <img src="/uploads/images/gallery4.jpg" class="img-fluid rounded-3 shadow" alt="School" style="height:200px;object-fit:cover;width:100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="py-5 section-bg">
+  <div class="container">
+    <div class="text-center mb-5 fade-in">
+      <p class="text-warning fw-bold mb-1" style="letter-spacing:2px;font-size:0.85rem">OUR STRENGTHS</p>
+      <h2 class="section-title">Why Choose G.S. SOVU?</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6 fade-in">
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h5 class="fw-bold mt-3"><%= settings.why_choose_1_title %></h5>
+          <p class="text-muted small"><%= settings.why_choose_1_desc %></p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 fade-in">
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-cross"></i></div>
+          <h5 class="fw-bold mt-3"><%= settings.why_choose_2_title %></h5>
+          <p class="text-muted small"><%= settings.why_choose_2_desc %></p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 fade-in">
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-users"></i></div>
+          <h5 class="fw-bold mt-3"><%= settings.why_choose_3_title %></h5>
+          <p class="text-muted small"><%= settings.why_choose_3_desc %></p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 fade-in">
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+          <h5 class="fw-bold mt-3"><%= settings.why_choose_4_title %></h5>
+          <p class="text-muted small"><%= settings.why_choose_4_desc %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Academic Programs -->
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5 fade-in">
+      <p class="text-warning fw-bold mb-1" style="letter-spacing:2px;font-size:0.85rem">EDUCATION LEVELS</p>
+      <h2 class="section-title">Academic Programs</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div class="program-card">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div style="width:50px;height:50px;background:var(--secondary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem">📚</div>
+            <h5 class="fw-bold mb-0">Primary School</h5>
+          </div>
+          <p class="text-muted small">Building strong foundations in literacy, numeracy, and Catholic values for young learners.</p>
+          <a href="/academics#primary" class="text-warning fw-semibold small">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div class="program-card">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div style="width:50px;height:50px;background:var(--secondary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem">🎓</div>
+            <h5 class="fw-bold mb-0">Ordinary Level</h5>
+          </div>
+          <p class="text-muted small">Comprehensive O'Level curriculum preparing students for national examinations with excellence.</p>
+          <a href="/academics#olevel" class="text-warning fw-semibold small">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div class="program-card">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div style="width:50px;height:50px;background:var(--secondary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem">🏆</div>
+            <h5 class="fw-bold mb-0">Advanced Level</h5>
+          </div>
+          <p class="text-muted small">LFK and MEG combinations for A'Level students pursuing higher education pathways.</p>
+          <a href="/academics#alevel" class="text-warning fw-semibold small">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest News -->
+<% if (news && news.length) { %>
+<section class="py-5 section-bg">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5 fade-in">
+      <div>
+        <p class="text-warning fw-bold mb-1" style="letter-spacing:2px;font-size:0.85rem">STAY INFORMED</p>
+        <h2 class="section-title text-start">Latest News</h2>
+      </div>
+      <a href="/news" class="btn-primary-custom">View All</a>
+    </div>
+    <div class="row g-4">
+      <% news.forEach(item => { %>
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div class="card news-card h-100">
+          <% if (item.image_url) { %>
+          <img src="<%= item.image_url %>" class="card-img-top" alt="<%= item.title %>">
+          <% } else { %>
+          <div style="height:200px;background:linear-gradient(135deg,var(--primary),#2a5298);display:flex;align-items:center;justify-content:center">
+            <i class="fas fa-newspaper fa-3x text-warning"></i>
+          </div>
+          <% } %>
+          <div class="card-body">
+            <span class="badge-category"><%= item.category || 'News' %></span>
+            <h6 class="fw-bold mt-2"><%= item.title %></h6>
+            <p class="text-muted small"><%= item.excerpt ? item.excerpt.substring(0,100) + '...' : '' %></p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pb-3">
+            <a href="/news/<%= item.slug %>" class="text-primary fw-semibold small">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+            <span class="text-muted small float-end"><%= new Date(item.created_at).toLocaleDateString('en-GB') %></span>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Upcoming Events -->
+<% if (events && events.length) { %>
+<section class="py-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5 fade-in">
+      <div>
+        <p class="text-warning fw-bold mb-1" style="letter-spacing:2px;font-size:0.85rem">WHAT'S COMING</p>
+        <h2 class="section-title text-start">Upcoming Events</h2>
+      </div>
+      <a href="/events" class="btn-primary-custom">View All</a>
+    </div>
+    <div class="row g-4">
+      <% events.forEach(ev => { %>
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="d-flex gap-3">
+              <div style="min-width:60px;height:60px;background:var(--primary);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white">
+                <span style="font-size:1.3rem;font-weight:800;line-height:1"><%= new Date(ev.event_date).getDate() %></span>
+                <span style="font-size:0.65rem;text-transform:uppercase"><%= new Date(ev.event_date).toLocaleString('en',{month:'short'}) %></span>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1"><%= ev.title %></h6>
+                <p class="text-muted small mb-1"><i class="fas fa-map-marker-alt me-1 text-warning"></i><%= ev.location %></p>
+                <p class="text-muted small"><%= ev.description ? ev.description.substring(0,80) + '...' : '' %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Gallery Preview -->
+<% if (gallery && gallery.length) { %>
+<section class="py-5 section-bg">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5 fade-in">
+      <div>
+        <p class="text-warning fw-bold mb-1" style="letter-spacing:2px;font-size:0.85rem">OUR SCHOOL LIFE</p>
+        <h2 class="section-title text-start">Photo Gallery</h2>
+      </div>
+      <a href="/gallery" class="btn-primary-custom">View All</a>
+    </div>
+    <div class="row g-3">
+      <% gallery.slice(0,6).forEach(img => { %>
+      <div class="col-lg-4 col-md-6 col-6 fade-in">
+        <div class="gallery-item">
+          <img src="<%= img.image_url %>" alt="<%= img.title %>">
+          <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Achievements -->
+<% if (achievements && achievements.length) { %>
+<section class="py-5" style="background:linear-gradient(135deg,var(--primary),#2a5298)">
+  <div class="container">
+    <div class="text-center mb-5 fade-in">
+      <p class="text-warning fw-bold mb-1" style="letter-spacing:2px;font-size:0.85rem">OUR PRIDE</p>
+      <h2 class="section-title" style="color:white">Achievements</h2>
+    </div>
+    <div class="row g-4">
+      <% achievements.forEach(a => { %>
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:25px;border:1px solid rgba(255,255,255,0.2);color:white">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <i class="fas fa-trophy fa-2x text-warning"></i>
+            <div>
+              <h6 class="fw-bold mb-0"><%= a.title %></h6>
+              <small class="text-warning"><%= a.year %></small>
+            </div>
+          </div>
+          <p style="color:rgba(255,255,255,0.8);font-size:0.88rem"><%= a.description %></p>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Testimonials -->
+<% if (testimonials && testimonials.length) { %>
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5 fade-in">
+      <p class="text-warning fw-bold mb-1" style="letter-spacing:2px;font-size:0.85rem">WHAT THEY SAY</p>
+      <h2 class="section-title">Testimonials</h2>
+    </div>
+    <div class="row g-4">
+      <% testimonials.forEach(t => { %>
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div class="testimonial-card">
+          <div class="quote">"</div>
+          <p class="text-muted"><%= t.message %></p>
+          <div class="d-flex align-items-center gap-3 mt-3">
+            <div style="width:45px;height:45px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700">
+              <%= t.name.charAt(0) %>
+            </div>
+            <div>
+              <div class="fw-bold small"><%= t.name %></div>
+              <div class="text-muted" style="font-size:0.78rem"><%= t.role %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Admissions CTA -->
+<section class="py-5 section-bg">
+  <div class="container">
+    <div class="row align-items-center g-4 fade-in">
+      <div class="col-lg-8">
+        <h3 class="fw-bold" style="color:var(--primary)">Ready to Join G.S. SOVU?</h3>
+        <p class="text-muted"><%= settings.admissions_info %></p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a href="/admissions" class="btn-gold me-3">Apply Now</a>
+        <a href="/contact" class="btn-primary-custom">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Sync hero text with slides
+const heroTexts = document.querySelectorAll('.hero-text-slide');
+const origGoTo = window.goTo;
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  let current = 0;
+  let timer;
+  function goTo(n) {
+    heroTexts[current]?.style && (heroTexts[current].style.display = 'none');
+    slides[current]?.classList.remove('active');
+    dots[current]?.classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current]?.classList.add('active');
+    dots[current]?.classList.add('active');
+    heroTexts[current]?.style && (heroTexts[current].style.display = 'block');
+  }
+  function startTimer() { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 5000); }
+  if (slides.length) {
+    slides[0].classList.add('active');
+    dots[0]?.classList.add('active');
+    startTimer();
+    dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); startTimer(); }));
+    document.getElementById('heroPrev')?.addEventListener('click', () => { goTo(current - 1); startTimer(); });
+    document.getElementById('heroNext')?.addEventListener('click', () => { goTo(current + 1); startTimer(); });
+  }
+});
+</script>
+
+<%- include('../partials/footer') %>

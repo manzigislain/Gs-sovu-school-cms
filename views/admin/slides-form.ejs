@@ -1,0 +1,33 @@
+<%- include('layout-top', {title: item ? 'Edit Slide' : 'Add Slide', path:'/admin/slides', user, messages}) %>
+<div class="admin-card">
+  <h5><%= item ? 'Edit Hero Slide' : 'Add Hero Slide' %></h5>
+  <form action="<%= item ? '/admin/slides/'+item.id+'/edit' : '/admin/slides/new' %>" method="POST" enctype="multipart/form-data">
+    <div class="row g-3">
+      <div class="col-12"><label class="form-label fw-semibold">Title</label><input type="text" name="title" class="form-control" value="<%= item ? item.title : '' %>"></div>
+      <div class="col-12"><label class="form-label fw-semibold">Subtitle</label><textarea name="subtitle" class="form-control" rows="2"><%= item ? (item.subtitle||'') : '' %></textarea></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Button Text</label><input type="text" name="button_text" class="form-control" value="<%= item ? (item.button_text||'') : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Button Link</label><input type="text" name="button_link" class="form-control" value="<%= item ? (item.button_link||'') : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Sort Order</label><input type="number" name="sort_order" class="form-control" value="<%= item ? item.sort_order : 0 %>"></div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Status</label>
+        <select name="active" class="form-select">
+          <option value="true" <%= item && item.active ? 'selected' : '' %>>Active</option>
+          <option value="false" <%= item && !item.active ? 'selected' : '' %>>Hidden</option>
+        </select>
+      </div>
+      <div class="col-12">
+        <label class="form-label fw-semibold">Slide Image</label>
+        <input type="file" name="image" class="form-control" accept="image/*">
+        <% if (item && item.image_url) { %>
+        <div class="mt-2"><img src="<%= item.image_url %>" class="rounded" style="height:100px;object-fit:cover" alt="current"><br><small class="text-muted">Current: <%= item.image_url %></small></div>
+        <input type="hidden" name="existing_image" value="<%= item.image_url %>">
+        <% } %>
+      </div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save</button>
+        <a href="/admin/slides" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

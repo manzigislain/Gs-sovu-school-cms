@@ -1,0 +1,30 @@
+<%- include('layout-top', {title: item ? 'Edit Event' : 'Add Event', path:'/admin/events', user, messages}) %>
+<div class="admin-card">
+  <h5><%= item ? 'Edit Event' : 'Add Event' %></h5>
+  <form action="<%= item ? '/admin/events/'+item.id+'/edit' : '/admin/events/new' %>" method="POST" enctype="multipart/form-data">
+    <div class="row g-3">
+      <div class="col-12"><label class="form-label fw-semibold">Title *</label><input type="text" name="title" class="form-control" required value="<%= item ? item.title : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Event Date</label><input type="date" name="event_date" class="form-control" value="<%= item && item.event_date ? new Date(item.event_date).toISOString().split('T')[0] : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Event Time</label><input type="text" name="event_time" class="form-control" placeholder="e.g. 9:00 AM" value="<%= item ? (item.event_time||'') : '' %>"></div>
+      <div class="col-md-8"><label class="form-label fw-semibold">Location</label><input type="text" name="location" class="form-control" value="<%= item ? (item.location||'') : '' %>"></div>
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Status</label>
+        <select name="active" class="form-select">
+          <option value="true" <%= !item || item.active ? 'selected' : '' %>>Active</option>
+          <option value="false" <%= item && !item.active ? 'selected' : '' %>>Hidden</option>
+        </select>
+      </div>
+      <div class="col-12"><label class="form-label fw-semibold">Description</label><textarea name="description" class="form-control" rows="4"><%= item ? (item.description||'') : '' %></textarea></div>
+      <div class="col-12">
+        <label class="form-label fw-semibold">Event Image</label>
+        <input type="file" name="image" class="form-control" accept="image/*">
+        <% if (item && item.image_url) { %><img src="<%= item.image_url %>" class="mt-2 rounded" style="height:80px;object-fit:cover" alt="current"><input type="hidden" name="existing_image" value="<%= item.image_url %>"><% } %>
+      </div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save</button>
+        <a href="/admin/events" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

@@ -1,0 +1,58 @@
+<%- include('layout-top', {title:'Site Settings', path:'/admin/settings', user, messages}) %>
+<div class="admin-card">
+  <h5>Site Settings</h5>
+  <p class="text-muted small mb-4">Edit all content displayed on the public website.</p>
+  <form action="/admin/settings" method="POST">
+    <ul class="nav nav-tabs mb-4" id="settingsTabs">
+      <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#general">General</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#about">About</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#whychoose">Why Choose Us</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#social">Social & Contact</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="general">
+        <div class="row g-3">
+          <div class="col-md-6"><label class="form-label fw-semibold">School Name</label><input type="text" name="school_name" class="form-control" value="<%= s.school_name %>"></div>
+          <div class="col-md-6"><label class="form-label fw-semibold">Tagline / Motto</label><input type="text" name="school_tagline" class="form-control" value="<%= s.school_tagline %>"></div>
+          <div class="col-md-6"><label class="form-label fw-semibold">School Type</label><input type="text" name="school_type" class="form-control" value="<%= s.school_type %>"></div>
+          <div class="col-md-6"><label class="form-label fw-semibold">Address</label><input type="text" name="school_address" class="form-control" value="<%= s.school_address %>"></div>
+          <div class="col-md-6"><label class="form-label fw-semibold">Phone 1</label><input type="text" name="school_phone1" class="form-control" value="<%= s.school_phone1 %>"></div>
+          <div class="col-md-6"><label class="form-label fw-semibold">Phone 2</label><input type="text" name="school_phone2" class="form-control" value="<%= s.school_phone2 %>"></div>
+          <div class="col-12"><label class="form-label fw-semibold">Email</label><input type="email" name="school_email" class="form-control" value="<%= s.school_email %>"></div>
+          <div class="col-12"><label class="form-label fw-semibold">Footer About Text</label><textarea name="footer_about" class="form-control" rows="3"><%= s.footer_about %></textarea></div>
+          <div class="col-12"><label class="form-label fw-semibold">Admissions Info</label><textarea name="admissions_info" class="form-control" rows="3"><%= s.admissions_info %></textarea></div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="about">
+        <div class="row g-3">
+          <div class="col-12"><label class="form-label fw-semibold">About Introduction</label><textarea name="about_intro" class="form-control" rows="4"><%= s.about_intro %></textarea></div>
+          <div class="col-12"><label class="form-label fw-semibold">Mission</label><textarea name="mission" class="form-control" rows="3"><%= s.mission %></textarea></div>
+          <div class="col-12"><label class="form-label fw-semibold">Vision</label><textarea name="vision" class="form-control" rows="3"><%= s.vision %></textarea></div>
+          <div class="col-12"><label class="form-label fw-semibold">School Motto</label><input type="text" name="motto" class="form-control" value="<%= s.motto %>"></div>
+          <div class="col-md-6"><label class="form-label fw-semibold">Head Teacher Name</label><input type="text" name="head_teacher_name" class="form-control" value="<%= s.head_teacher_name %>"></div>
+          <div class="col-md-6"><label class="form-label fw-semibold">Head Teacher Image URL</label><input type="text" name="head_teacher_image" class="form-control" value="<%= s.head_teacher_image %>"></div>
+          <div class="col-12"><label class="form-label fw-semibold">Head Teacher Message</label><textarea name="head_teacher_message" class="form-control" rows="5"><%= s.head_teacher_message %></textarea></div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="whychoose">
+        <div class="row g-3">
+          <% for (let i = 1; i <= 4; i++) { %>
+          <div class="col-md-6"><label class="form-label fw-semibold">Reason <%= i %> Title</label><input type="text" name="why_choose_<%= i %>_title" class="form-control" value="<%= s['why_choose_'+i+'_title'] %>"></div>
+          <div class="col-md-6"><label class="form-label fw-semibold">Reason <%= i %> Description</label><input type="text" name="why_choose_<%= i %>_desc" class="form-control" value="<%= s['why_choose_'+i+'_desc'] %>"></div>
+          <% } %>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="social">
+        <div class="row g-3">
+          <div class="col-md-4"><label class="form-label fw-semibold">Facebook URL</label><input type="text" name="facebook_url" class="form-control" value="<%= s.facebook_url %>"></div>
+          <div class="col-md-4"><label class="form-label fw-semibold">Twitter URL</label><input type="text" name="twitter_url" class="form-control" value="<%= s.twitter_url %>"></div>
+          <div class="col-md-4"><label class="form-label fw-semibold">YouTube URL</label><input type="text" name="youtube_url" class="form-control" value="<%= s.youtube_url %>"></div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary px-5"><i class="fas fa-save me-2"></i>Save All Settings</button>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

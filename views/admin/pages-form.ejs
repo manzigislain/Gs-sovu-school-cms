@@ -1,0 +1,24 @@
+<%- include('layout-top', {title:'Edit Page: '+item.title, path:'/admin/pages', user, messages}) %>
+<div class="admin-card">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h5>Edit Page: <%= item.title %></h5>
+    <a href="/<%= item.slug %>" target="_blank" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye me-1"></i>Preview</a>
+  </div>
+  <form action="/admin/pages/<%= item.id %>/edit" method="POST">
+    <div class="row g-3">
+      <div class="col-md-8"><label class="form-label fw-semibold">Page Title</label><input type="text" name="title" class="form-control" value="<%= item.title %>"></div>
+      <div class="col-md-4"><label class="form-label fw-semibold">Slug (URL)</label><input type="text" name="slug" class="form-control" value="<%= item.slug %>"></div>
+      <div class="col-12"><label class="form-label fw-semibold">Meta Description (SEO)</label><input type="text" name="meta_description" class="form-control" value="<%= item.meta_description || '' %>"></div>
+      <div class="col-12">
+        <label class="form-label fw-semibold">Page Content (HTML)</label>
+        <textarea name="content" class="form-control" rows="20" id="pageContent"><%= item.content %></textarea>
+        <small class="text-muted">You can use HTML tags for formatting.</small>
+      </div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save Page</button>
+        <a href="/admin/pages" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

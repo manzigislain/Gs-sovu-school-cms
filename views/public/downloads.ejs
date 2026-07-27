@@ -1,0 +1,64 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+<div class="breadcrumb-section">
+  <div class="container">
+    <h1 class="fw-bold">Downloads</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Downloads</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<section class="py-5">
+  <div class="container">
+    <% if (downloads && downloads.length) { %>
+    <% const cats = [...new Set(downloads.map(d => d.category).filter(Boolean))]; %>
+    <% if (cats.length) { %>
+      <% cats.forEach(cat => { %>
+      <h5 class="fw-bold mb-3" style="color:var(--primary)"><i class="fas fa-folder-open me-2 text-warning"></i><%= cat %></h5>
+      <div class="row g-3 mb-5">
+        <% downloads.filter(d => d.category === cat).forEach(d => { %>
+        <div class="col-lg-4 col-md-6 fade-in">
+          <div class="card p-3 d-flex flex-row align-items-center gap-3">
+            <div style="width:50px;height:50px;background:#fff0f0;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <i class="fas fa-file-pdf fa-lg text-danger"></i>
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="fw-bold mb-0 small"><%= d.title %></h6>
+              <% if (d.description) { %><p class="text-muted mb-0" style="font-size:0.75rem"><%= d.description %></p><% } %>
+            </div>
+            <a href="<%= d.file_url %>" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></a>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% }) %>
+    <% } else { %>
+    <div class="row g-3">
+      <% downloads.forEach(d => { %>
+      <div class="col-lg-4 col-md-6 fade-in">
+        <div class="card p-3 d-flex flex-row align-items-center gap-3">
+          <div style="width:50px;height:50px;background:#fff0f0;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <i class="fas fa-file-pdf fa-lg text-danger"></i>
+          </div>
+          <div class="flex-grow-1">
+            <h6 class="fw-bold mb-0 small"><%= d.title %></h6>
+            <% if (d.description) { %><p class="text-muted mb-0" style="font-size:0.75rem"><%= d.description %></p><% } %>
+          </div>
+          <a href="<%= d.file_url %>" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></a>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } %>
+    <% } else { %>
+    <div class="text-center py-5">
+      <i class="fas fa-file-download fa-4x text-muted mb-3"></i>
+      <p class="text-muted">No downloads available yet.</p>
+    </div>
+    <% } %>
+  </div>
+</section>
+<%- include('../partials/footer') %>

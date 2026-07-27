@@ -1,0 +1,77 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+<div class="breadcrumb-section">
+  <div class="container">
+    <h1 class="fw-bold">Contact Us</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Contact</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<section class="py-5">
+  <div class="container">
+    <% if (typeof success !== 'undefined' && success) { %>
+    <div class="alert alert-success alert-dismissible fade show mb-4">
+      <i class="fas fa-check-circle me-2"></i>Your message has been sent successfully! We will get back to you soon.
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <% } %>
+    <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-danger alert-dismissible fade show mb-4">
+      <i class="fas fa-exclamation-circle me-2"></i><%= error %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <% } %>
+    <div class="row g-5">
+      <div class="col-lg-4 fade-in">
+        <div class="contact-info-card mb-4">
+          <h5><i class="fas fa-phone me-2"></i>Phone</h5>
+          <p class="mb-1"><a href="tel:<%= settings.school_phone1 %>" style="color:rgba(255,255,255,0.85)"><%= settings.school_phone1 %></a></p>
+          <p><a href="tel:<%= settings.school_phone2 %>" style="color:rgba(255,255,255,0.85)"><%= settings.school_phone2 %></a></p>
+          <h5><i class="fas fa-envelope me-2"></i>Email</h5>
+          <p><a href="mailto:<%= settings.school_email %>" style="color:rgba(255,255,255,0.85)"><%= settings.school_email %></a></p>
+          <h5><i class="fas fa-map-marker-alt me-2"></i>Address</h5>
+          <p style="color:rgba(255,255,255,0.85)"><%= settings.school_address %></p>
+        </div>
+      </div>
+      <div class="col-lg-8 fade-in">
+        <div class="admin-card">
+          <h5 class="fw-bold mb-4" style="color:var(--primary)">Send Us a Message</h5>
+          <form action="/contact" method="POST" enctype="multipart/form-data">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Full Name *</label>
+                <input type="text" name="full_name" class="form-control" required placeholder="Your full name">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Email *</label>
+                <input type="email" name="email" class="form-control" required placeholder="your@email.com">
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Subject *</label>
+                <input type="text" name="subject" class="form-control" required placeholder="Message subject">
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Message *</label>
+                <textarea name="message" class="form-control" rows="5" required placeholder="Your message..."></textarea>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Attachment (optional)</label>
+                <input type="file" name="attachment" class="form-control" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-gold px-5">
+                  <i class="fas fa-paper-plane me-2"></i>Send Message
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

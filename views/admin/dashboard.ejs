@@ -1,0 +1,71 @@
+<%- include('layout-top', {title:'Dashboard', path:'/admin/dashboard', user, messages}) %>
+
+<div class="row g-4 mb-4">
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-widget">
+      <div class="stat-widget-icon" style="background:#e8f0fe"><i class="fas fa-newspaper" style="color:var(--primary)"></i></div>
+      <div><div class="fw-bold fs-4"><%= stats.news %></div><div class="text-muted small">News Articles</div></div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-widget">
+      <div class="stat-widget-icon" style="background:#fff3cd"><i class="fas fa-calendar" style="color:#c9a84c"></i></div>
+      <div><div class="fw-bold fs-4"><%= stats.events %></div><div class="text-muted small">Events</div></div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-widget">
+      <div class="stat-widget-icon" style="background:#d1e7dd"><i class="fas fa-images" style="color:#198754"></i></div>
+      <div><div class="fw-bold fs-4"><%= stats.gallery %></div><div class="text-muted small">Gallery Images</div></div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-widget">
+      <div class="stat-widget-icon" style="background:#f8d7da"><i class="fas fa-envelope" style="color:#dc3545"></i></div>
+      <div><div class="fw-bold fs-4"><%= stats.messages %></div><div class="text-muted small">Messages</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="admin-card">
+      <h5>Recent Messages</h5>
+      <% if (recentMessages && recentMessages.length) { %>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead><tr><th>Name</th><th>Subject</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody>
+            <% recentMessages.forEach(m => { %>
+            <tr>
+              <td><%= m.full_name %></td>
+              <td><%= m.subject ? m.subject.substring(0,40) : '-' %></td>
+              <td><%= new Date(m.created_at).toLocaleDateString('en-GB') %></td>
+              <td><span class="badge <%= m.read ? 'bg-secondary' : 'bg-danger' %>"><%= m.read ? 'Read' : 'New' %></span></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <a href="/admin/messages" class="text-primary small">View all messages →</a>
+      <% } else { %>
+      <p class="text-muted small">No messages yet.</p>
+      <% } %>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="admin-card">
+      <h5>Quick Actions</h5>
+      <div class="d-flex flex-column gap-2">
+        <a href="/admin/news/new" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus me-2"></i>Add News</a>
+        <a href="/admin/events/new" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus me-2"></i>Add Event</a>
+        <a href="/admin/gallery/new" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus me-2"></i>Add Gallery Image</a>
+        <a href="/admin/announcements/new" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus me-2"></i>Add Announcement</a>
+        <a href="/admin/downloads/new" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus me-2"></i>Upload Document</a>
+        <a href="/admin/settings" class="btn btn-sm btn-outline-secondary"><i class="fas fa-cog me-2"></i>Site Settings</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('layout-bottom') %>

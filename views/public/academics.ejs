@@ -1,0 +1,81 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+<div class="breadcrumb-section">
+  <div class="container">
+    <h1 class="fw-bold">Academic Programs</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Academics</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5 fade-in">
+      <h2 class="section-title">Our Academic Programs</h2>
+      <p class="text-muted">Providing quality education from Primary through Advanced Level</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-6 fade-in" id="primary">
+        <div class="card p-4 h-100">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div style="width:60px;height:60px;background:var(--secondary);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.8rem">📚</div>
+            <h4 class="fw-bold mb-0">Primary School</h4>
+          </div>
+          <p class="text-muted">Our primary program builds a strong foundation in literacy, numeracy, and Catholic values. Students receive a comprehensive education that prepares them for secondary school.</p>
+          <ul class="text-muted small">
+            <li>P1 – P6 classes</li>
+            <li>Core subjects: Kinyarwanda, English, French, Mathematics, Science, Social Studies, Religion</li>
+            <li>Extracurricular activities and sports</li>
+            <li>Regular assessments and national examinations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6 fade-in" id="olevel">
+        <div class="card p-4 h-100">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div style="width:60px;height:60px;background:var(--secondary);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.8rem">🎓</div>
+            <h4 class="fw-bold mb-0">Ordinary Level (O' Level)</h4>
+          </div>
+          <p class="text-muted">Our O'Level program follows the national curriculum, preparing students for the national examinations with a focus on academic excellence and character development.</p>
+          <ul class="text-muted small">
+            <li>S1 – S3 classes</li>
+            <li>National curriculum subjects</li>
+            <li>Preparation for national O'Level examinations</li>
+            <li>Clubs, sports, and leadership programs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6 fade-in" id="alevel">
+        <div class="card p-4 h-100">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div style="width:60px;height:60px;background:var(--secondary);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.8rem">🏆</div>
+            <h4 class="fw-bold mb-0">Advanced Level (A' Level)</h4>
+          </div>
+          <p class="text-muted">Our A'Level program offers two combinations designed to prepare students for university and professional careers.</p>
+          <ul class="text-muted small">
+            <li>S4 – S6 classes</li>
+            <li>LFK and MEG combinations available</li>
+            <li>University entrance preparation</li>
+            <li>Research and project-based learning</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 fade-in" id="lfk">
+        <div class="card p-4 h-100" style="border-left:5px solid var(--secondary)">
+          <h5 class="fw-bold">LFK Combination</h5>
+          <p class="text-muted small">Literature, French, Kinyarwanda — for students passionate about languages and humanities.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 fade-in" id="meg">
+        <div class="card p-4 h-100" style="border-left:5px solid var(--primary)">
+          <h5 class="fw-bold">MEG Combination</h5>
+          <p class="text-muted small">Mathematics, Economics, Geography — for students pursuing sciences and social sciences.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

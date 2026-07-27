@@ -1,0 +1,64 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+<div class="breadcrumb-section">
+  <div class="container">
+    <h1 class="fw-bold">Digital Library</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Library</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5 fade-in">
+      <h2 class="section-title">Online Educational Resources</h2>
+      <p class="text-muted">Access free educational resources from leading digital libraries worldwide</p>
+    </div>
+    <div class="row g-4">
+      <% [
+        {name:'Open Library',url:'https://openlibrary.org',icon:'fas fa-book-open',desc:'Access millions of free books online',color:'#1a3a6b'},
+        {name:'Internet Archive',url:'https://archive.org',icon:'fas fa-archive',desc:'Digital library of books, movies, music and more',color:'#c9a84c'},
+        {name:'Project Gutenberg',url:'https://www.gutenberg.org',icon:'fas fa-scroll',desc:'Over 60,000 free eBooks',color:'#198754'},
+        {name:'Google Books',url:'https://books.google.com',icon:'fab fa-google',desc:'Search and preview millions of books',color:'#dc3545'},
+        {name:'Khan Academy',url:'https://www.khanacademy.org',icon:'fas fa-graduation-cap',desc:'Free world-class education for anyone',color:'#0d6efd'},
+        {name:'BBC Learning',url:'https://www.bbc.co.uk/bitesize',icon:'fas fa-tv',desc:'Educational resources for students',color:'#6f42c1'},
+        {name:'CK-12',url:'https://www.ck12.org',icon:'fas fa-atom',desc:'Free STEM educational resources',color:'#fd7e14'},
+        {name:'JSTOR',url:'https://www.jstor.org',icon:'fas fa-university',desc:'Academic journals and books',color:'#20c997'},
+      ].forEach(lib => { %>
+      <div class="col-lg-3 col-md-4 col-6 fade-in">
+        <a href="<%= lib.url %>" target="_blank" rel="noopener" class="text-decoration-none">
+          <div class="card p-4 text-center h-100" style="border-top:4px solid <%= lib.color %>">
+            <i class="<%= lib.icon %> fa-2x mb-3" style="color:<%= lib.color %>"></i>
+            <h6 class="fw-bold"><%= lib.name %></h6>
+            <p class="text-muted small"><%= lib.desc %></p>
+            <span class="text-primary small">Visit <i class="fas fa-external-link-alt ms-1"></i></span>
+          </div>
+        </a>
+      </div>
+      <% }) %>
+    </div>
+    <% if (downloads && downloads.length) { %>
+    <div class="mt-5 fade-in">
+      <h4 class="fw-bold mb-4" style="color:var(--primary)"><i class="fas fa-file-pdf me-2 text-warning"></i>Past Papers & Resources</h4>
+      <div class="row g-3">
+        <% downloads.forEach(d => { %>
+        <div class="col-lg-4 col-md-6">
+          <div class="card p-3 d-flex flex-row align-items-center gap-3">
+            <i class="fas fa-file-pdf fa-lg text-danger"></i>
+            <div class="flex-grow-1">
+              <h6 class="fw-bold mb-0 small"><%= d.title %></h6>
+              <% if (d.category) { %><span class="text-muted" style="font-size:0.75rem"><%= d.category %></span><% } %>
+            </div>
+            <a href="<%= d.file_url %>" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></a>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</section>
+<%- include('../partials/footer') %>

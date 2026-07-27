@@ -1,0 +1,28 @@
+<%- include('layout-top', {title: item ? 'Edit Document' : 'Upload Document', path:'/admin/downloads', user, messages}) %>
+<div class="admin-card">
+  <h5><%= item ? 'Edit Document' : 'Upload Document' %></h5>
+  <form action="<%= item ? '/admin/downloads/'+item.id+'/edit' : '/admin/downloads/new' %>" method="POST" enctype="multipart/form-data">
+    <div class="row g-3">
+      <div class="col-12"><label class="form-label fw-semibold">Title *</label><input type="text" name="title" class="form-control" required value="<%= item ? item.title : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Category</label><input type="text" name="category" class="form-control" placeholder="e.g. School Rules, Fees, Calendar" value="<%= item ? (item.category||'') : '' %>"></div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Status</label>
+        <select name="active" class="form-select">
+          <option value="true" <%= !item || item.active ? 'selected' : '' %>>Active</option>
+          <option value="false" <%= item && !item.active ? 'selected' : '' %>>Hidden</option>
+        </select>
+      </div>
+      <div class="col-12"><label class="form-label fw-semibold">Description</label><textarea name="description" class="form-control" rows="2"><%= item ? (item.description||'') : '' %></textarea></div>
+      <div class="col-12">
+        <label class="form-label fw-semibold">PDF / Document File</label>
+        <input type="file" name="file" class="form-control" accept=".pdf,.doc,.docx" <%= item ? '' : 'required' %>>
+        <% if (item && item.file_url) { %><p class="mt-1 small text-muted">Current: <a href="<%= item.file_url %>" target="_blank"><%= item.file_url %></a></p><input type="hidden" name="existing_file" value="<%= item.file_url %>"><% } %>
+      </div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save</button>
+        <a href="/admin/downloads" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

@@ -1,0 +1,40 @@
+<%- include('layout-top', {title: item ? 'Edit Staff' : 'Add Staff', path:'/admin/staff', user, messages}) %>
+<div class="admin-card">
+  <h5><%= item ? 'Edit Staff Member' : 'Add Staff Member' %></h5>
+  <form action="<%= item ? '/admin/staff/'+item.id+'/edit' : '/admin/staff/new' %>" method="POST" enctype="multipart/form-data">
+    <div class="row g-3">
+      <div class="col-md-6"><label class="form-label fw-semibold">Full Name *</label><input type="text" name="name" class="form-control" required value="<%= item ? item.name : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Position</label><input type="text" name="position" class="form-control" value="<%= item ? (item.position||'') : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Department</label><input type="text" name="department" class="form-control" value="<%= item ? (item.department||'') : '' %>"></div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Staff Type</label>
+        <select name="staff_type" class="form-select">
+          <option value="teacher" <%= !item || item.staff_type==='teacher' ? 'selected' : '' %>>Teacher</option>
+          <option value="admin" <%= item && item.staff_type==='admin' ? 'selected' : '' %>>Administration</option>
+          <option value="support" <%= item && item.staff_type==='support' ? 'selected' : '' %>>Support Staff</option>
+        </select>
+      </div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Email</label><input type="email" name="email" class="form-control" value="<%= item ? (item.email||'') : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Phone</label><input type="text" name="phone" class="form-control" value="<%= item ? (item.phone||'') : '' %>"></div>
+      <div class="col-12"><label class="form-label fw-semibold">Bio</label><textarea name="bio" class="form-control" rows="3"><%= item ? (item.bio||'') : '' %></textarea></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Sort Order</label><input type="number" name="sort_order" class="form-control" value="<%= item ? item.sort_order : 0 %>"></div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Status</label>
+        <select name="active" class="form-select">
+          <option value="true" <%= !item || item.active ? 'selected' : '' %>>Active</option>
+          <option value="false" <%= item && !item.active ? 'selected' : '' %>>Hidden</option>
+        </select>
+      </div>
+      <div class="col-12">
+        <label class="form-label fw-semibold">Photo</label>
+        <input type="file" name="image" class="form-control" accept="image/*">
+        <% if (item && item.image_url) { %><img src="<%= item.image_url %>" class="mt-2 rounded-circle" style="height:70px;width:70px;object-fit:cover" alt="current"><input type="hidden" name="existing_image" value="<%= item.image_url %>"><% } %>
+      </div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save</button>
+        <a href="/admin/staff" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

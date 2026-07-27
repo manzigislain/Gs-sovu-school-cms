@@ -1,0 +1,29 @@
+<%- include('layout-top', {title:'Testimonials', path:'/admin/testimonials', user, messages}) %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0">Testimonials</h5>
+  <a href="/admin/testimonials/new" class="btn btn-primary btn-sm"><i class="fas fa-plus me-1"></i>Add Testimonial</a>
+</div>
+<div class="admin-table">
+  <table class="table table-hover mb-0">
+    <thead><tr><th>Name</th><th>Role</th><th>Message</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% if (items && items.length) { items.forEach(item => { %>
+      <tr>
+        <td class="fw-semibold"><%= item.name %></td>
+        <td><%= item.role || '-' %></td>
+        <td class="text-muted small"><%= item.message.substring(0,60) %>...</td>
+        <td><span class="badge <%= item.active?'bg-success':'bg-secondary' %>"><%= item.active?'Active':'Hidden' %></span></td>
+        <td>
+          <a href="/admin/testimonials/<%= item.id %>/edit" class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></a>
+          <form action="/admin/testimonials/<%= item.id %>/delete" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-sm btn-outline-danger btn-delete"><i class="fas fa-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+      <% }) } else { %>
+      <tr><td colspan="5" class="text-center text-muted py-4">No testimonials yet.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+<%- include('layout-bottom') %>

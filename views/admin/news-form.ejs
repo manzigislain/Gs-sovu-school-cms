@@ -1,0 +1,36 @@
+<%- include('layout-top', {title: item ? 'Edit News' : 'Add News', path:'/admin/news', user, messages}) %>
+<div class="admin-card">
+  <h5><%= item ? 'Edit News Article' : 'Add News Article' %></h5>
+  <form action="<%= item ? '/admin/news/'+item.id+'/edit' : '/admin/news/new' %>" method="POST" enctype="multipart/form-data">
+    <div class="row g-3">
+      <div class="col-12"><label class="form-label fw-semibold">Title *</label><input type="text" name="title" class="form-control" required value="<%= item ? item.title : '' %>"></div>
+      <div class="col-md-6"><label class="form-label fw-semibold">Category</label><input type="text" name="category" class="form-control" placeholder="e.g. School News, Academics" value="<%= item ? (item.category||'') : '' %>"></div>
+      <div class="col-md-3">
+        <label class="form-label fw-semibold">Status</label>
+        <select name="published" class="form-select">
+          <option value="false" <%= item && !item.published ? 'selected' : '' %>>Draft</option>
+          <option value="true" <%= item && item.published ? 'selected' : '' %>>Published</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label fw-semibold">Featured</label>
+        <select name="featured" class="form-select">
+          <option value="false" <%= item && !item.featured ? 'selected' : '' %>>No</option>
+          <option value="true" <%= item && item.featured ? 'selected' : '' %>>Yes</option>
+        </select>
+      </div>
+      <div class="col-12"><label class="form-label fw-semibold">Excerpt</label><textarea name="excerpt" class="form-control" rows="2" placeholder="Short summary..."><%= item ? (item.excerpt||'') : '' %></textarea></div>
+      <div class="col-12"><label class="form-label fw-semibold">Content *</label><textarea name="content" class="form-control" rows="10" required><%= item ? (item.content||'') : '' %></textarea></div>
+      <div class="col-12">
+        <label class="form-label fw-semibold">Featured Image</label>
+        <input type="file" name="image" class="form-control" accept="image/*">
+        <% if (item && item.image_url) { %><img src="<%= item.image_url %>" class="mt-2 rounded" style="height:80px;object-fit:cover" alt="current"><% } %>
+      </div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save</button>
+        <a href="/admin/news" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include('layout-bottom') %>

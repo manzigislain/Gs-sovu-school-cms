@@ -1,0 +1,76 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+<div class="breadcrumb-section">
+  <div class="container">
+    <h1 class="fw-bold">Admissions</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Admissions</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-8 fade-in">
+        <div class="admin-card mb-4">
+          <h4 class="fw-bold mb-3" style="color:var(--primary)">Admissions Information</h4>
+          <p class="text-muted"><%= settings.admissions_info %></p>
+        </div>
+        <div class="admin-card mb-4">
+          <h5 class="fw-bold mb-3" style="color:var(--primary)">Application Process</h5>
+          <div class="d-flex flex-column gap-3">
+            <% [['1','Obtain Application Form','Visit the school office or download the form from our website.'],
+                ['2','Complete the Form','Fill in all required information accurately.'],
+                ['3','Gather Documents','Collect all required supporting documents.'],
+                ['4','Submit Application','Submit your completed application to the school office.'],
+                ['5','Await Response','We will contact you regarding the outcome of your application.']].forEach(([n,t,d]) => { %>
+            <div class="d-flex gap-3 align-items-start">
+              <div style="width:35px;height:35px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;flex-shrink:0"><%= n %></div>
+              <div>
+                <h6 class="fw-bold mb-1"><%= t %></h6>
+                <p class="text-muted small mb-0"><%= d %></p>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+        <div class="admin-card">
+          <h5 class="fw-bold mb-3" style="color:var(--primary)">Required Documents</h5>
+          <ul class="text-muted">
+            <li class="mb-2">Completed application form</li>
+            <li class="mb-2">Previous school reports / transcripts</li>
+            <li class="mb-2">Birth certificate (original + copy)</li>
+            <li class="mb-2">2 recent passport-size photographs</li>
+            <li class="mb-2">Medical certificate</li>
+            <li class="mb-2">Baptism certificate (for Catholic applicants)</li>
+            <li class="mb-2">National ID or parent/guardian ID</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4 fade-in">
+        <div class="contact-info-card mb-4">
+          <h5><i class="fas fa-info-circle me-2"></i>Contact Admissions</h5>
+          <p style="color:rgba(255,255,255,0.85);font-size:0.88rem">For admissions inquiries, please contact us:</p>
+          <p><i class="fas fa-phone me-2 text-warning"></i><a href="tel:<%= settings.school_phone1 %>" style="color:rgba(255,255,255,0.85)"><%= settings.school_phone1 %></a></p>
+          <p><i class="fas fa-envelope me-2 text-warning"></i><a href="mailto:<%= settings.school_email %>" style="color:rgba(255,255,255,0.85)"><%= settings.school_email %></a></p>
+        </div>
+        <% if (downloads && downloads.length) { %>
+        <div class="admin-card">
+          <h6 class="fw-bold mb-3" style="color:var(--primary)">Download Forms</h6>
+          <% downloads.forEach(d => { %>
+          <a href="<%= d.file_url %>" target="_blank" class="d-flex align-items-center gap-2 p-2 rounded mb-2 text-decoration-none" style="background:var(--light)">
+            <i class="fas fa-file-pdf text-danger"></i>
+            <span class="small fw-semibold text-dark"><%= d.title %></span>
+            <i class="fas fa-download ms-auto text-muted small"></i>
+          </a>
+          <% }) %>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>
